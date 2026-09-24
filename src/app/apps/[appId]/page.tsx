@@ -1,3 +1,4 @@
+import InstallAppButton from "@/app/components/Apps/InstallAppButton";
 import { getAllApps } from "@/app/lib/apps";
 import { IApp } from "@/app/types/apps-tyle";
 import Image from "next/image";
@@ -6,6 +7,15 @@ interface TAppDetailsProps {
   params: {
     appId: string;
   };
+}
+
+// *****************************************************
+export async function generateStaticParams() {
+  const allApps = await getAllApps();
+  const appIds = allApps.map((app: IApp) => {
+    return { appId: app.id.toString() };
+  });
+  return appIds;
 }
 
 const AppDetails = async ({ params }: TAppDetailsProps) => {
@@ -65,9 +75,7 @@ const AppDetails = async ({ params }: TAppDetailsProps) => {
                   </p>
                 </div>
               </div>
-              <button className="btn btn-success text-white mt-4">
-                Install Now ({app.size} MB)
-              </button>
+              <InstallAppButton app={app} />
             </div>
           </div>
           <div className="border-b border-gray-300 py-5">

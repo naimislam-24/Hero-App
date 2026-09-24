@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <AppProvider>
           <Navbar />
-          {children}
+          <div className="min-h-[78vh]">{children}</div>
           <Footer />
           <ToastContainer />
         </AppProvider>
